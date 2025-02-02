@@ -4,9 +4,20 @@
 
 A really basic example of using the Anthropic API to access Claude using the plain REST API rather than using an SDK.
 
+## Acknowledgments
+Written in collaboration with Cursor and GitHub Copilot.
+
 ## Setup
 
 Rename `.env-example` to `.env` and add your Anthropic API key.
+
+Right now there are a few different functions you can run but you have to manually comment the ones you want to run in:
+
+1. A straightforward question
+2. Rewriting text from a PDF in modern English
+3. Getting the named characters from text of a PDF
+
+The latter two can be run against the PDF included in this project.
 
 ## Running
 
