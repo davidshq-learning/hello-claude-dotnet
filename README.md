@@ -37,3 +37,6 @@ You should get a response back that looks something like this:
         "output_tokens":33
     }
 }
+```
+Note that the responses may vary, for example another time I ran the same code I received this reply:
+> "The capital of France is Paris."

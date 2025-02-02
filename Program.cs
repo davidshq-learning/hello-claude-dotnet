@@ -5,6 +5,8 @@ using System.Text.Json;
 
 class Program
 {
+    const string Model = "claude-3-5-sonnet-20241022";
+    const int MaxTokens = 1000;
     static async Task Main(string[] args)
     {
         // Example usage
@@ -21,7 +23,7 @@ class Program
         }
     }
 
-    public static async Task<string> CreateClaudeCompletion(string prompt, string model = "claude-3-5-sonnet-20241022", int maxTokens = 1000)
+    public static async Task<string> CreateClaudeCompletion(string prompt, string model = Model, int maxTokens = MaxTokens)
     {
         // Load environment variables from .env file
         DotEnv.Load();
@@ -36,6 +38,7 @@ class Program
         {
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+            // This is the API version
             client.DefaultRequestHeaders.Add("anthropic-version", "2023-06-01");
 
             var data = new
@@ -48,7 +51,7 @@ class Program
                 }
             };
 
-            var json = System.Text.Json.JsonSerializer.Serialize(data);
+            var json = JsonSerializer.Serialize(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync("https://api.anthropic.com/v1/messages", content);
@@ -59,7 +62,8 @@ class Program
             }
 
             var responseData = await response.Content.ReadAsStringAsync();
-            // Parse the JSON response
+
+            // For our purposes, lets show raw, not as parsed JSON
             return responseData;
         }
     }
